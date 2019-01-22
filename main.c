@@ -1,35 +1,65 @@
-//
-//  main.c
-//  upload
-//
-//  Created by 申 on 2019/1/22.
-//  Copyright © 2019 C_Project. All rights reserved.
-//
-
 #include <stdio.h>
-
-
-//将n个圆盘从x柱子上借助y柱子移动到z柱子上
-void mov(int n, char x, char y, char z)
+#include <stdlib.h>
+#include <time.h>
+void insertsort(int a[11],int n);
+int main (void)
 {
-    if(n == 1)
-        printf("圆盘编号 %d :从 %c 移动到 %c\n",n,x,z);
-    else
+    int i,j;
+    int t;
+    int n;
+    int a[11]={0};
+    srand(time(NULL));
+    for(i=0;i<10;i++)
+    {
+        a[i]=(rand()%100)+1;
+       
+    }//随机生成10个数存入数组
+    for(i=0;i<10;i++)
+    {
+        for(j=0;j<9-i;j++)
         {
-            mov(n-1,x,y,z);
-            printf("圆盘编号 %d:从 %c 移动到 %c\n",n,x,z);
-            mov(n-1,y,x,z);
+            if(a[j]>a[j+1])
+            {
+                t=a[j];
+                a[j]=a[j+1];
+                a[j+1]=t;
+                
+            }
         }
-}
-int main()
-{
-   
-    char ch1 = 'A';
-    char ch2 = 'B';
-    char ch3 = 'C';
-    int n;   //n代表圆盘的个数
-    printf("请输入圆盘的个数：");
+    }//冒泡排序
+    
+    printf("The original string is below:\n");
+    for(i=0;i<10;i++)
+    {
+        printf("%3d",a[i]);
+    }
+    printf("\n\n");//输出原数组
+    
+    printf("Please enter the number you want to insert:");
     scanf("%d",&n);
-    mov(n,ch1,ch2,ch3);
+    printf("\n\n");
+    for(i=0;i<10;i++)
+    {
+        if(n<a[i])
+        {
+            for(j=11;j>i;j--)
+            {
+                a[j]=a[j-1];
+            }
+            a[i]=n;
+            break;
+            
+        }
+    }//插入排序
+    printf("The inserted string is below:\n");
+    for(i=0;i<11;i++)
+    {
+        printf("%3d",a[i]);
+    }//输出新数组
+    printf("\n\n");
+    
+     
+    
     return 0;
+    
 }
